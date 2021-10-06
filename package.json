@@ -1,0 +1,25 @@
+{
+  "name": "pmd-grupo4",
+  "version": "1.0.0",
+  "description": "Aplicação ETL para a disciplina de PMD",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cappi-s/PMD-grupo4.git"
+  },
+  "author": "Diana de Sales, Ian Louzada, Pedro Leal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cappi-s/PMD-grupo4/issues"
+  },
+  "homepage": "https://github.com/Cappi-s/PMD-grupo4#readme",
+  "dependencies": {
+    "axios": "^0.22.0",
+    "dotenv": "^10.0.0",
+    "neo4j-driver": "^4.3.3",
+    "redis": "^3.1.2"
+  }
+}
