@@ -19,13 +19,16 @@ function setupRedis() {
 
 function setupNeo4j() {
     const driver = neo4j.driver(
-        'neo4j://localhost',
-        neo4j.auth.basic('neo4j', '1234')
+        process.env.NEO4J_HOST,
+        neo4j.auth.basic(
+            process.env.NEO4J_USER, 
+            process.env.NEO4J_PASSWORD
+        )
     )
 
     const client = driver.session({
-    database: 'movies',
-    defaultAccessMode: neo4j.session.WRITE
+        database: process.env.NEO4J_DATABASE,
+        defaultAccessMode: neo4j.session.WRITE
     })
 
     return client
@@ -38,17 +41,15 @@ async function main() {
     res = await axios.get(API_URL("/movie/550"))
 
     await redisClient.set(550, JSON.stringify(res.data))
+    await redisClient.get(550, redis.print)
+
     await neo4jClient.run(
         'CREATE (m:Movie {title: $title}) RETURN m',
         { title: res.data.original_title }
     )
-    
-    await redisClient.get(550, redis.print)
-
     res = await neo4jClient.run('MATCH (m:Movie) RETURN m',)
     const singleRecord = res.records[0]
     const node = singleRecord.get(0)
-
     console.log(node)
 }
 
