@@ -8,7 +8,7 @@ const requestConfig = {
     }
 }
 
-const pagesToFetch = 100
+const pagesToFetch = 10
 
 class TMDBStore {
 
