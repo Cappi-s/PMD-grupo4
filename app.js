@@ -6,6 +6,7 @@ const Neo4jStore = require('./store/neo4j')
 const BannedWordsStore = require('./store/bannedwords')
 
 const RedisMovie = require('./model/redisMovie')
+const Neo4jMovie = require('./model/neo4jMovie')
 
 async function main() {
     try {
@@ -31,6 +32,12 @@ async function main() {
         //TEMP CODE SO PRA TESTAR SE TA SALVANDO NO REDIS
         const randomMovie = await redisStore.getMovieByTitle(redisMovies[0].title)
         console.log(randomMovie)
+        
+        let neo4jMovies = Neo4jMovie.FromJSON(...jsonMovies)
+        
+        neo4jStore.InsertMany(...neo4jMovies)
+
+        console.log("Ready to go :)")
     } catch (error) {
         console.log("Error: ", error)
     }
