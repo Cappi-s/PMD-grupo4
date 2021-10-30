@@ -1,5 +1,6 @@
 class RedisMovie {
-    constructor(title, description, year, averageRate){
+    constructor(id, title, description, year, averageRate){
+        this.id = id
         this.title = title 
         this.description = description 
         this.year = year 
@@ -14,6 +15,7 @@ class RedisMovie {
             let averageRate = RedisMovie._transformRate(movie.vote_average)
     
             movies.push(new RedisMovie(
+                movie.id,
                 movie.original_title, 
                 movie.overview, 
                 year, 
