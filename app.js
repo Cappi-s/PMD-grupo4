@@ -17,11 +17,20 @@ async function main() {
 
         let jsonMovies = await tmdbStore.GetMovies()
         jsonMovies = await bannedWordsStore.FilterMovies(...jsonMovies)
-       
-        let redisMovies = RedisMovie.FromJSON(...jsonMovies)
-        console.log(redisMovies)
 
-       
+        console.log('Getting reviews')
+        for (const movie of jsonMovies) {
+            const movieReviews = await tmdbStore._getReviewsByMovieId(movie.id)
+            movie.reviews = movieReviews
+        }
+        
+        let redisMovies = RedisMovie.FromJSON(...jsonMovies)
+
+        await redisStore.setMovies(...redisMovies)
+
+        //TEMP CODE SO PRA TESTAR SE TA SALVANDO NO REDIS
+        const randomMovie = await redisStore.getMovieByTitle(redisMovies[0].title)
+        console.log(randomMovie)
     } catch (error) {
         console.log("Error: ", error)
     }

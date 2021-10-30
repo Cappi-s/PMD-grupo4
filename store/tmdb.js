@@ -44,6 +44,16 @@ class TMDBStore {
             })
         })
     }
+
+    _getReviewsByMovieId(movieId) {
+        return new Promise((resolve, reject) => {
+            axios.get('/movie/' + movieId + '/reviews', requestConfig).then(res => {
+                resolve(res.data.results)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
 }
 
 module.exports = TMDBStore

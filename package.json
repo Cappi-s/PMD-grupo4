@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Cappi-s/PMD-grupo4#readme",
   "dependencies": {
+    "async-redis": "^2.0.0",
     "axios": "^0.22.0",
     "dotenv": "^10.0.0",
     "neo4j-driver": "^4.3.3",

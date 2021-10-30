@@ -1,10 +1,10 @@
 class RedisMovie {
-    constructor(title, description, year, averageRate){
-        this.title = title 
-        this.description = description 
-        this.year = year 
-        this.averageRate = averageRate 
-        this.lastReviews = []
+    constructor(title, description, year, averageRate, lastReviews) {
+        this.title = title
+        this.description = description
+        this.year = year
+        this.averageRate = averageRate
+        this.lastReviews = lastReviews
     }
 
     static FromJSON(...jsonMovies) {
@@ -12,15 +12,17 @@ class RedisMovie {
         jsonMovies.forEach(movie => {
             let year = movie.release_date.split('-')[0]
             let averageRate = RedisMovie._transformRate(movie.vote_average)
-    
+            let lastReviews = RedisMovie._reduceReview(...movie.reviews)
+
             movies.push(new RedisMovie(
-                movie.original_title, 
-                movie.overview, 
-                year, 
-                averageRate
+                movie.original_title,
+                movie.overview,
+                year,
+                averageRate,
+                lastReviews
             ))
         })
-        
+
         if (movies.length === 1) {
             return movies[0]
         }
@@ -33,6 +35,17 @@ class RedisMovie {
         if (rate >= 6) return 'B'
         if (rate >= 4) return 'C'
         return 'F'
+    }
+
+    static _reduceReview(...reviews) {
+        let reducedReviews = []
+        reviews.forEach(review => {
+            reducedReviews.push({
+                author: review.author,
+                content: review.content
+            })
+        })
+        return reducedReviews
     }
 }
 
