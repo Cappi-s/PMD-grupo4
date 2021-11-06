@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "all": "docker-compose -p moviegetter up --build --remove-orphans"
+    "all": "docker-compose -p moviegetter up --build --remove-orphans",
+    "soft-all": "docker-compose -p moviegetter up"
   },
   "repository": {
     "type": "git",
