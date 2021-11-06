@@ -20,9 +20,8 @@ services:
     healthcheck:
       test:  perl -MIO::Socket::INET -e 'exit(! defined( IO::Socket::INET->new("localhost:7687")))'
       interval: 1s
-      timeout: 10s
-      retries: 20
-      start_period: 40s
+      timeout: 1000s
+      retries: 100
   redis:
     image: "redis:alpine"
     ports: 
@@ -30,8 +29,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "redis-cli ping || exit 1"]
       interval: 1s
-      timeout: 5s
-      retries: 10
+      timeout: 1000s
+      retries: 100
   app: 
     build: 
       context: ./
