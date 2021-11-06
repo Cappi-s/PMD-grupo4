@@ -17,12 +17,12 @@ class RedisStore {
     async setMovies(...movies) {
         console.log('Saving movies on Redis')
         for(const movie of movies) {
-            await this._client.set(movie.title, JSON.stringify(movie))
+            await this._client.set(movie.id, JSON.stringify(movie))
         }
     }
 
-    async getMovieByTitle(title) {
-        const movieString = await this._client.get(title)
+    async getMovieByID(id) {
+        const movieString = await this._client.get(id)
         return JSON.parse(movieString)
     }
 }

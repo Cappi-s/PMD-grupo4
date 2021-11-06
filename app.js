@@ -24,17 +24,14 @@ async function main() {
             const movieReviews = await tmdbStore._getReviewsByMovieId(movie.id)
             movie.reviews = movieReviews
         }
-        
+
         let redisMovies = RedisMovie.FromJSON(...jsonMovies)
 
         await redisStore.setMovies(...redisMovies)
 
-        //TEMP CODE SO PRA TESTAR SE TA SALVANDO NO REDIS
-        const randomMovie = await redisStore.getMovieByTitle(redisMovies[0].title)
-        console.log(randomMovie)
-        
+
         let neo4jMovies = Neo4jMovie.FromJSON(...jsonMovies)
-        
+
         neo4jStore.InsertMany(...neo4jMovies)
 
         console.log("Ready to go :)")
