@@ -30,7 +30,7 @@ class TMDBStore {
                 let m = await this._getMoviesByPage(i)
                 movies.push(...m)
             }
-
+            console.log('Done.\n#')
             resolve(movies)
         })
     }
@@ -45,7 +45,7 @@ class TMDBStore {
         })
     }
 
-    _getReviewsByMovieId(movieId) {
+    GetReviewsByMovieId(movieId) {
         return new Promise((resolve, reject) => {
             axios.get('/movie/' + movieId + '/reviews', requestConfig).then(res => {
                 resolve(res.data.results)

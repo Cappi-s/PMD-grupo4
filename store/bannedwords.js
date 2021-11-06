@@ -35,6 +35,7 @@ class BannedWordsStore {
 
                     return !filterOff
                 })
+                console.log('Done.\n#')
                 resolve(filteredMovies)
             }).catch(err => {
                 reject(err)

@@ -4,7 +4,8 @@
   "description": "Aplicação ETL para a disciplina de PMD",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "all": "docker-compose -p moviegetter up --build --remove-orphans"
   },
   "repository": {
     "type": "git",

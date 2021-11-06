@@ -19,16 +19,16 @@ async function main() {
         let jsonMovies = await tmdbStore.GetMovies()
         jsonMovies = await bannedWordsStore.FilterMovies(...jsonMovies)
 
-        console.log('Getting reviews')
+        console.log('Getting reviews...')
         for (const movie of jsonMovies) {
-            const movieReviews = await tmdbStore._getReviewsByMovieId(movie.id)
+            const movieReviews = await tmdbStore.GetReviewsByMovieId(movie.id)
             movie.reviews = movieReviews
         }
+        console.log('Done.\n#')
 
         let redisMovies = RedisMovie.FromJSON(...jsonMovies)
 
         await redisStore.setMovies(...redisMovies)
-
 
         let neo4jMovies = Neo4jMovie.FromJSON(...jsonMovies)
 

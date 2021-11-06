@@ -5,7 +5,7 @@ class Neo4jStore {
         const client = neo4j.driver(
             process.env.NEO4J_HOST,
             neo4j.auth.basic(
-                process.env.NEO4J_USER,
+                process.env.NEO4J_USERNAME,
                 process.env.NEO4J_PASSWORD
             )
         )
@@ -31,6 +31,8 @@ class Neo4jStore {
               console.log("Error inserting: ", error)
            }
         })
+
+        console.log('Done.\n#')
     }
 }
 

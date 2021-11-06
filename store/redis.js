@@ -2,7 +2,10 @@ const redis = require("async-redis");
 
 class RedisStore {
     constructor(){
-        const client = redis.createClient();
+        const client = redis.createClient({
+            host: process.env.REDIS_HOST,
+            port: process.env.REDIS_PORT
+        });
         client.on("error", function(error) {
             console.error(error);
         });
@@ -15,10 +18,11 @@ class RedisStore {
     }
 
     async setMovies(...movies) {
-        console.log('Saving movies on Redis')
+        console.log('Saving movies in Redis...')
         for(const movie of movies) {
             await this._client.set(movie.id, JSON.stringify(movie))
         }
+        console.log('Done.\n#')
     }
 
     async getMovieByID(id) {
