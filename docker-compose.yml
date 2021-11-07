@@ -18,7 +18,7 @@ services:
       - NEO4J_USERNAME=neo4j
       - NEO4J_PASSWORD=test
     healthcheck:
-      test:  perl -MIO::Socket::INET -e 'exit(! defined( IO::Socket::INET->new("localhost:7687")))'
+      test: ["CMD", "cypher-shell", "match (n) return count(n)"]
       interval: 1s
       timeout: 1000s
       retries: 100

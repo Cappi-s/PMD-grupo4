@@ -16,7 +16,9 @@ async function main() {
     neo4jStore = new Neo4jStore();
 
     let jsonMovies = await tmdbStore.GetMovies();
+    console.log("json movie quant", jsonMovies.length)
     jsonMovies = await bannedWordsStore.FilterMovies(...jsonMovies);
+    console.log("filtered", jsonMovies.length)
 
     console.log("Getting reviews...");
     for (const movie of jsonMovies) {

@@ -13,10 +13,6 @@ class RedisStore {
         this._client = client
     }
 
-    doSomething(){
-        //this._client.get()
-    }
-
     async setMovies(...movies) {
         console.log('Saving movies in Redis...')
         for(const movie of movies) {

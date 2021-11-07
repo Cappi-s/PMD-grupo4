@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-const URL = 'https://www.cs.cmu.edu/~biglou/resources/bad-words.txt'
+const URL = 'http://www.bannedwordlist.com/lists/swearWords.txt'
 
 class BannedWordsStore {
 
@@ -12,8 +12,8 @@ class BannedWordsStore {
 
                 console.log("Filtering movies by banned words...")
                 
-                let bannedWords = res.data.split('\n').filter(v => v != '')
-                
+                let bannedWords = res.data.split('\n').filter(v => v != '').map(v => v.replace('\r', ''))
+              
                 let filteredMovies = jsonMovies.filter(movie => {
 
                     let filterOff = false
