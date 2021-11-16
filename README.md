@@ -1,7 +1,7 @@
 # PMD-grupo4 - MovieGetter
 
 ## Requisitos
-Para rodar essa aplicação é necessário ter instalado o `docker-compose`. 
+Para rodar essa aplicação é necessário ter instalado o `docker-composev1.29+`. 
 > Para verificar use o comando `docker-compose -v` 
 
 ## Como rodar 
