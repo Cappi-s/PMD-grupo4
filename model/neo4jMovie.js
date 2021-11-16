@@ -8,7 +8,10 @@ class Neo4jMovie {
     static FromJSON(...jsonMovies) {
         let movies = []
         jsonMovies.forEach(movie => {
-            let year = movie.release_date.split('-')[0]
+            let year = ""
+            if (movie.release_date) {
+                year = movie.release_date.split('-')[0]
+            }
     
             movies.push(new Neo4jMovie(
                 movie.id,

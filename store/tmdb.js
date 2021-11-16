@@ -8,7 +8,6 @@ const requestConfig = {
   },
 };
 
-console.log(process.env.PAGES_TO_FETCH)
 const pagesToFetch = process.env.PAGES_TO_FETCH;
 
 class TMDBStore {

@@ -16,12 +16,15 @@ async function main() {
     neo4jStore = new Neo4jStore();
 
     let jsonMovies = await tmdbStore.GetMovies();
-    console.log("json movie quant", jsonMovies.length)
     jsonMovies = await bannedWordsStore.FilterMovies(...jsonMovies);
-    console.log("filtered", jsonMovies.length)
 
     console.log("Getting reviews...");
+    let i = 0
     for (const movie of jsonMovies) {
+      i++
+      if (i%100 == 0) {
+        console.log(`${i}/${jsonMovies.length}`);
+      }
       const movieReviews = await tmdbStore.GetReviewsByMovieId(movie.id);
       movie.reviews = movieReviews;
     }
@@ -36,7 +39,7 @@ async function main() {
     neo4jStore.InsertMany(...neo4jMovies);
 
     console.log("Inserting movies cast...");
-    let i = 0;
+    i = 0;
     for (const movie of neo4jMovies) {
       i++;
       console.log(`${i}/${neo4jMovies.length}`);

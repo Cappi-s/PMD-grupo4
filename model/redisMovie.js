@@ -11,7 +11,10 @@ class RedisMovie {
     static FromJSON(...jsonMovies) {
         let movies = []
         jsonMovies.forEach(movie => {
-            let year = movie.release_date.split('-')[0]
+            let year = ""
+            if (movie.release_date) {
+                year = movie.release_date.split('-')[0]
+            }
             let averageRate = RedisMovie._transformRate(movie.vote_average)
             let lastReviews = RedisMovie._reduceReview(...movie.reviews)
 
